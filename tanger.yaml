@@ -1,0 +1,276 @@
+# Ceci est un projet  qui permet de gerer les incidents a tanger med
+# DotNet Junior et React Native Junior
+
+RapportEvenement_MS(ms1)_ROLES(admin,collaborator)_SUB-MODULE(rapport)_MENU(Rapport Management):
+  id: Long ID
+  code: String REF_REQ
+  dateEvenement: LocalDateTime
+  dateSoumission: LocalDateTime
+  attachments: String LARGE
+  description: String LARGE
+  recommendation: String LARGE
+  directivePmjChef: String LARGE
+  port: Port
+  mois: Integer
+  annee: Integer
+  windDirection: WindDirection
+  windForce: BigDecimal
+  currentDirection: CurrentDirection
+  currentForce: BigDecimal
+  swellHeigth: BigDecimal
+  swellDirection: BigDecimal
+  typeEvenement: TypeEvenement
+  collaborator: Collaborator
+  vessel: Vessel
+  fonde: Boolean
+  typeRapportEvenement: TypeRapportEvenement
+  secteur: Secteur
+  journalAmelioaration: JournalAmelioaration
+
+
+
+
+CurrentDirection_STATE(N=info,NE=warning,E=danger,SE=secondary,S=primary,SW=success,W=dark, NW=success)_MS(ms1)_ROLES(admin)_SUB-MODULE(indicateur)_MENU(Incdicateur Config Managment):
+  id: Long ID
+  code: String REF_REQ
+  label: String LABEL_REQ
+  style: String STYLE_REQ
+
+WindDirection_STATE(N=info,NE=warning,E=danger,SE=secondary,S=primary,SW=success,W=dark, NW=success)_MS(ms1)_ROLES(admin)_SUB-MODULE(indicateur)_MENU(Incdicateur Config Managment):
+  id: Long ID
+  code: String REF_REQ
+  label: String LABEL_REQ
+  style: String STYLE_REQ
+
+RapportEvenementMensuel_MS(ms1)_ROLES(admin)_SUB-MODULE(mensuel)_MENU(Rapport Mensuel Management):
+  id: Long ID
+  code: String REF_REQ
+  dateEmission: LocalDateTime
+  description: String LARGE
+  mois: Integer
+  annee: Integer
+  nombreMouvement: Integer
+  total: BigDecimal
+  indicateurGlobal: BigDecimal
+  nombreMouvementCumul: Integer
+  totalCumul: BigDecimal
+  indicateurGlobalCumul: BigDecimal
+  rapportEvenementMensuelSecteurs: RapportEvenementMensuelSecteur List
+  rapportEvenementMensuelTypeEvenements: RapportEvenementMensuelTypeEvenement List
+
+RapportEvenementMensuelTypeEvenement_MS(ms1)_ROLES(admin)_SUB-MODULE(mensuel)_MENU(Rapport Mensuel Management):
+  id: Long ID
+  rapportEvenementMensuel: RapportEvenementMensuel
+  typeEvenement: TypeEvenement
+  total: BigDecimal
+  totalAnneePrecendente: BigDecimal
+  variation: BigDecimal
+  indicateurGlobal: BigDecimal
+  totalCumul: BigDecimal
+  indicateurGlobalCumul: BigDecimal
+
+RapportEvenementMensuelSecteur_MS(ms1)_ROLES(admin)_SUB-MODULE(mensuel)_MENU(Rapport Mensuel Management):
+  id: Long ID
+  rapportEvenementMensuel: RapportEvenementMensuel
+  secteur: Secteur
+  total: BigDecimal
+  indicateurGlobal: BigDecimal
+  totalCumul: BigDecimal
+  indicateurGlobalCumul: BigDecimal
+  rapportEvenementMensuelSecteurDetails: RapportEvenementMensuelSecteurDetail List
+
+RapportEvenementMensuelSecteurDetail_MS(ms1)_ROLES(admin)_SUB-MODULE(mensuel)_MENU(Rapport Mensuel Management):
+  id: Long ID
+  rapportEvenementMensuelSecteur: RapportEvenementMensuelSecteur
+  total: BigDecimal
+  indicateurGlobal: BigDecimal
+  typeEvenement: TypeEvenement
+
+TypeCollaborator_STATE(Pilot=warning,Captain=success,VTS=danger)_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Commun Management):
+  id: Long ID
+  indexation: Integer
+  code: String REF_REQ
+  label: String LABEL_REQ
+  style: String STYLE_REQ
+  color: String
+
+Vessel_STATE(MERSK LABERA=warning,MSC TESSA=success,EMERALD=danger)_MS(ms1)_ROLES(admin,collaborator)_SUB-MODULE(commun)_MENU(Commun Management):
+  id: Long ID
+  code: String REF_REQ
+  label: String LABEL_REQ
+  style: String STYLE_REQ
+  loa: BigDecimal
+  draft: BigDecimal
+  airDraft: BigDecimal
+  typeVessel: TypeVessel
+
+TypeVessel_STATE(Container=warning,Ferry=success,Tanker=danger)_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Commun Management):
+  id: Long ID
+  indexation: Integer
+  code: String REF_REQ
+  label: String LABEL_REQ
+  style: String STYLE_REQ
+  color: String
+
+Port_STATE(TM1=warning,TM2=success,PPR=danger)_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Commun Management):
+  id: Long ID
+  indexation: Integer
+  code: String REF_REQ
+  label: String LABEL_REQ
+  style: String STYLE_REQ
+  color: String
+
+Secteur_STATE(Pilotage=warning,Lamanage=success,Remorquage=danger)_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Commun Management):
+  id: Long ID
+  indexation: Integer
+  code: String REF_REQ
+  label: String LABEL_REQ
+  style: String STYLE_REQ
+  color: String
+
+TypeRapportEvenement_STATE(New=warning,Pending=success,Validated=danger)_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Commun Management):
+  id: Long ID
+  indexation: Integer
+  code: String REF_REQ
+  label: String LABEL_REQ
+  style: String STYLE_REQ
+  color: String
+
+TypeEvenement_STATE(Anomaly=warning,Emergency=success,Accident=danger)_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Commun Management):
+  id: Long ID
+  indexation: Integer
+  code: String REF_REQ
+  label: String LABEL_REQ
+  style: String STYLE_REQ
+  color: String
+
+
+Collaborator_ACTOR_MS(ms1)_ROLES(admin,collaborator)_SUB-MODULE(actor)_MENU(Commun Management):
+  id: Long ID
+  description: String LARGE
+  typeCollaborator: TypeCollaborator
+
+
+JournalAmelioaration_MS(ms1)_ROLES(admin)_SUB-MODULE(journal)_MENU(Journal Managment):
+  id: Long ID
+  ref: REF_REQ
+  dateJournalAmelioaration: LocalDateTime REQ
+  annee: Integer REQ
+  processus: Processus REQ
+  dateButoir: LocalDateTime
+  dateRealisation: LocalDateTime
+  dateEvaluation : LocalDateTime
+  dateCloture: LocalDateTime
+  avancement: BigDecimal
+  descriptionEcrat: String LARGE
+  descriptionAction: String LARGE
+  commentaire: String LARGE
+  causeSuppose: String LARGE
+  systemeManagement : SystemeManagement
+  categorieEcrate: CategorieEcrate
+  origineEcrate: OrigineEcrate
+  typeAction: TypeAction
+  collaborator: Collaborator
+  critereEvaluation: CritereEvaluation
+  resultatEvaluation: ResultatEvaluation
+
+
+SystemeManagement_STATE(QE=warning,S=success,QSE=danger,SE=info)_MS(ms1)_ROLES(admin)_SUB-MODULE(journal)_MENU(Journal Config Managment):
+  id: Long ID
+  code: String REF_REQ
+  label: String LABEL_REQ
+  style: String STYLE_REQ
+
+Processus_STATE(Pilotage=warning,Lamanage=success,Remorquage=danger)_MS(ms1)_ROLES(admin)_SUB-MODULE(journal)_MENU(Journal Config Managment):
+  id: Long ID
+  code: String REF_REQ
+  label: String LABEL_REQ
+  style: String STYLE_REQ
+
+CategorieEcrate_STATE(Améliorationaly=warning,Observation=success,Remarque=danger,Non conformité=info,Constat=warning2)_MS(ms1)_ROLES(admin)_SUB-MODULE(journal)_MENU(Journal Config Managment):
+  id: Long ID
+  code: String REF_REQ
+  label: String LABEL_REQ
+  style: String STYLE_REQ
+
+OrigineEcrate_STATE(Analyse des données=warning,Gestion des Informations du TMMS=success,Constat=danger,Audit interne QSE=info,Réclamation client=warning2,Rapport du pilote=info2,Fiche AEMAC=success2)_MS(ms1)_ROLES(admin)_SUB-MODULE(journal)_MENU(Journal Config Managment):
+  id: Long ID
+  code: String REF_REQ
+  label: String LABEL_REQ
+  style: String STYLE_REQ
+
+TypeAction_STATE(Corrective=warning,Préventive=success,Amélioration=danger)_MS(ms1)_ROLES(admin)_SUB-MODULE(journal)_MENU(Journal Config Managment):
+  id: Long ID
+  code: String REF_REQ
+  label: String LABEL_REQ
+  style: String STYLE_REQ
+
+CritereEvaluation_STATE(Réalisation et fiabilité de alignement=warning,Surveillance de la réalisation des Exercices de sécurité=success,Réalisation et enregistrement des exercices 2D à la vigie=danger,Convention validée par le DG et signée avec ISEM=info,Action couverte par le dernier RQ Formation=warning2,Procédure appliquée=success2, Enregistrements sont utilisées=info2,Vérification par le VTS et les Dispatchers pilotage=danger2,suivi du plan de passage par le VTS=warning3,Suivi de état des remorques=success3,Suivi de état des échelles de pilote du MV EOS=info3,Mise en place une échelle de pilote conforme=danger3,Exécution de la note=warning4,correction de écart=success4,Participation de tous les pilotes=info4,Non reproduction une Emergency similaire=danger4 )_MS(ms1)_ROLES(admin)_SUB-MODULE(journal)_MENU(Journal Config Managment):
+  id: Long ID
+  code: String REF_REQ
+  label: String LABEL_REQ
+  style: String STYLE_REQ
+
+ResultatEvaluation_STATE(Efficace=success)_MS(ms1)_ROLES(admin)_SUB-MODULE(journal)_MENU(Journal Config Managment):
+  id: Long ID
+  code: String REF_REQ
+  label: String LABEL_REQ
+  style: String STYLE_REQ
+
+Process_MS(ms1)_ROLES(admin)_SUB-MODULE(process)_MENU(Process Managment):
+  id: Long ID
+  code: REF_REQ
+  description: LARGE
+  processElements: ProcessElement List
+
+
+ProcessElement_MS(ms1)_ROLES(admin)_SUB-MODULE(process)_MENU(Process Managment):
+  id: Long ID
+  description: String LARGE
+  objectifs: String LARGE
+  axePolitique: AxePolitique
+  da: Da
+  process: Process
+  indicateurProcessElements: IndicateurProcessElement List
+
+
+IndicateurProcessElement_MS(ms1)_ROLES(admin)_SUB-MODULE(indicateur)_MENU(Incdicateur Managment):
+  id: Long ID
+  numero: String REF_REQ
+  label: String LABEL_REQ
+  description: String LARGE
+  valeurCible: BigDecimal
+  frequenceMesure: FrequenceMesure
+  processElement: ProcessElement
+  processStepElementMensualites: ProcessStepElementMensualite List
+
+
+FrequenceMesure_STATE(Mensuelle=success,Annuel=info)_MS(ms1)_ROLES(admin)_SUB-MODULE(indicateur)_MENU(Incdicateur Config Managment):
+  id: Long ID
+  code: String REF_REQ
+  label: String LABEL_REQ
+  style: String STYLE_REQ
+
+ProcessStepElementMensualite_MS(ms1)_ROLES(admin)_SUB-MODULE(indicateur)_MENU(Indicateur Management):
+  id: Long ID
+  mois: Mois
+  indicateurProcessElement: IndicateurProcessElement
+  valeur: BigDecimal
+
+Mois_STATE(Janvier=success,Fevrier=info,Mars=warning,Avril=danger,Mai=success2,Juin=info2,Juillet=warning2,Aout=danger2,Septembre=success3,Octobre=info3,Novembre=warning3,Decembre=danger3)_MS(ms1)_ROLES(admin)_SUB-MODULE(commun)_MENU(Commun Managment):
+  id: Long ID
+  code: String REF_REQ
+  label: String LABEL_REQ
+  style: String STYLE_REQ
+  numero: Integer
+  trimestre: Trimestre
+
+
+Trimestre_STATE(T1=success,T2=info,T3=warning,T4=danger)_MS(ms1)_ROLES(admin)_SUB-MODULE(indicateur)_MENU(Incdicateur Config Managment):
+  id: Long ID
+  code: String REF_REQ
+  label: String LABEL_REQ
+  style: String STYLE_REQ
+
+
+

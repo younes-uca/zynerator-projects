@@ -1,0 +1,143 @@
+# Ceci est un projet channel Inc qui veut gerer les boutiques de channel dans le monde
+# Techno : Spring junior & 2- React Senior
+OrderBoutique_MS(ms1)_ROLES(admin)_EXPORT_IMPORTABLE_SUB-MODULE(order)_MENU(Purchase Management,pi pi-fw pi-pencil)_ICON(pi pi-check):
+    id: Long ID
+    boutique: Boutique
+    orderBoutiqueItems: OrderBoutiqueItem List
+    code: String REF_REQ
+    reference: String LABEL_REQ
+    description: String LARGE
+    dateOrder: LocalDateTime
+    quantite: BigDecimal
+    totalNonCompliance: BigDecimal
+    montantTotal: BigDecimal
+    produitCatalog: ProduitCatalog
+    buyingFrame: String
+    orderBoutiques: OrderBoutique List
+    responsableBoutique: ResponsableBoutique
+    orderSatus: OrderSatus
+    orderSatusDate: LocalDateTime
+    preferenceClient: String #preferenceClient:PreferenceClient
+    
+OrderBoutiqueItem_MS(ms1)_ROLES(admin)_EXPORT_IMPORTABLE_SUB-MODULE(order)_MENU(Purchase Management,pi pi-fw pi-pencil)_ICON(pi pi-check):
+    id: Long ID
+    orderBoutique: OrderBoutique
+    quantite: BigDecimal
+    montantTotal: BigDecimal
+    orderBoutiqueItemDetails: OrderBoutiqueItemDetail List
+    nonCompliances: NonCompliance List
+    produit: Produit
+    sizeRule: String #sizeRule:SizeRule
+
+
+OrderBoutiqueItemDetail_MS(ms1)_ROLES(admin)_EXPORT_IMPORTABLE_SUB-MODULE(order)_MENU(Purchase Management,pi pi-fw pi-pencil)_ICON(pi pi-check):
+    id: Long ID
+    orderBoutiqueItem: OrderBoutiqueItem
+    produitDetail: ProduitDetail
+    prix: BigDecimal
+    quantite: BigDecimal
+    montantTotal: BigDecimal
+
+
+OrderSatus_TAG_MS(ms1)_ROLES(admin)_SUB-MODULE(order)_MENU(Collaborator,pi pi-fw pi-pencil)_ICON(pi pi-check):
+    id: Long ID
+    reference: String LABEL_REQ
+    code: String REF_REQ
+    description: String LARGE
+
+#--------------------------------------------------------- MS EXTENDEDPRODUCT --------------------------------
+ProduitCatalog_MS(ms1)_ROLES(admin)_SUB-MODULE(catalog)_MENU(Purchase Management,pi pi-fw pi-pencil)_ICON(pi pi-check):
+    id: Long ID
+    code: String REF_REQ
+    reference: String LABEL_REQ
+    description: String LARGE
+    produits: Produit List
+    #produitCatalogLooks: ProduitCatalogLook List
+    #produitCatalogThemes: ProduitCatalogTheme List
+
+
+Produit_MS(ms1)_INIT_ROLES(admin)_SUB-MODULE(catalog)_MENU(Collaborator,pi pi-fw pi-pencil)_ICON(pi pi-check):
+    id: Long ID
+    code: String REF_REQ
+    reference: String LABEL_REQ
+    description: String LARGE
+    produitCatalog: ProduitCatalog
+    shapeProduit: ShapeProduit
+    produitDetails: ProduitDetail List
+    theme: Theme
+    look: Look
+    totalLikes: BigDecimal
+    
+
+ProduitDetail_MS(ms1)_INIT_ROLES(admin)_SUB-MODULE(catalog)_MENU(Collaborator,pi pi-fw pi-pencil)_ICON(pi pi-check):
+    id: Long ID
+    code: String REF_REQ
+    reference: String LABEL_REQ
+    description: String LARGE
+    produit: Produit
+    matiereProduit: MatiereProduit
+    couleurProduit: CouleurProduit
+    sizeGrid: SizeGrid
+    finitionProduit: FinitionProduit
+
+
+MatiereProduit_MS(ms1)_ROLES(admin)_INIT_SUB-MODULE(referentiel)_MENU(Collaborator,pi pi-fw pi-pencil)_ICON(pi pi-check):
+    id: Long ID
+    reference: String LABEL_REQ
+    code: String REF_REQ
+    description: String LARGE
+    
+    
+CouleurProduit_MS(ms1)_ROLES(admin)_INIT_SUB-MODULE(referentiel)_MENU(Collaborator,pi pi-fw pi-pencil)_ICON(pi pi-check):
+    id: Long ID
+    reference: String LABEL_REQ
+    code: String REF_REQ
+    description: String LARGE
+
+Theme_MS(ms1)_ROLES(admin)_INIT_SUB-MODULE(referentiel)_MENU(Collaborator,pi pi-fw pi-pencil)_ICON(pi pi-check):
+    id: Long ID
+    reference: String LABEL_REQ
+    code: String REF_REQ
+    description: String LARGE
+
+Look_MS(ms1)_ROLES(admin)_SUB-MODULE(referentiel)_MENU(Collaborator,pi pi-fw pi-pencil)_ICON(pi pi-check):
+    id: Long ID
+    reference: String LABEL_REQ
+    code: String REF_REQ
+    description: String LARGE
+
+    
+SizeGrid_MS(ms1)_ROLES(admin)_SUB-MODULE(referentiel)_MENU(Collaborator,pi pi-fw pi-pencil)_ICON(pi pi-check):
+    id: Long ID
+    reference: String LABEL_REQ
+    code: String REF_REQ
+    description: String LARGE
+      
+    
+FinitionProduit_MS(ms1)_ROLES(admin)_SUB-MODULE(referentiel)_MENU(Collaborator,pi pi-fw pi-pencil)_ICON(pi pi-check):
+    id: Long ID
+    reference: String LABEL_REQ
+    code: String REF_REQ
+    description: String LARGE
+
+SubDepartement_MS(ms1)_ROLES(admin)_SUB-MODULE(referentiel)_MENU(Collaborator,pi pi-fw pi-pencil)_ICON(pi pi-check):
+    id: Long ID
+    reference: String LABEL_REQ
+    code: String REF_REQ
+    description: String LARGE
+    shapeProduits: ShapeProduit List
+
+ShapeProduit_MS(ms1)_ROLES(admin)_SUB-MODULE(referentiel)_MENU(Collaborator,pi pi-fw pi-pencil)_ICON(pi pi-check):
+    id: Long ID
+    reference: String LABEL_REQ
+    code: String REF_REQ
+    description: String LARGE
+    subDepartement: SubDepartement
+    shapeProduitDetails: ShapeProduitDetail List
+
+ShapeProduitDetail_MS(ms1)_ROLES(admin)_SUB-MODULE(referentiel)_MENU(Collaborator,pi pi-fw pi-pencil)_ICON(pi pi-check):
+    id: Long ID
+    shapeProduit: ShapeProduit
+    sizeGrid: SizeGrid
+
+

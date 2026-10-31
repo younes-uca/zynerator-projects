@@ -1,0 +1,590 @@
+# Ceci est un projet  qui permet de gerer OCP group de l extraction de phosphate a son expedition
+# Techno : Nest junior & React Native junior
+
+
+Periode_MS(ms1)_ROLES(admin)_SUB-MODULE(production)_MENU(Production):
+  id: Long ID
+  code: String REF_REQ
+  libelle: String LABEL_REQ
+  description: String LARGE
+  mois: Integer
+  annee: Integer
+  dateDebut: LocalDateTime
+  dateFin: LocalDateTime
+  exercices: Exercice List
+Exercice_MS(ms1)_ROLES(admin)_SUB-MODULE(production)_MENU(Production):
+  id: Long ID
+  code: String REF_REQ
+  libelle: String LABEL_REQ
+  description: String LARGE
+  mois: Integer
+  annee: Integer
+  dateDebut: LocalDateTime
+  dateFin: LocalDateTime
+  periode: Periode
+
+# module planification
+ProgrammeManutentionPeriode_MS(ms1)_ROLES(admin)_SUB-MODULE(plannification)_MENU(Plannification):
+  id: Long ID
+  code: String REF_REQ
+  libelle: String LABEL_REQ
+  description: String LARGE
+  periode: Periode
+  dateProgrammeManutentionPeriode: LocalDateTime
+  etatProgrammeManutentionPeriode: EtatProgrammeManutentionPeriode
+  emailOuvertureProgrammeManutention: EmailOuvertureProgrammeManutention
+  emailFermetureProgrammeManutention: EmailFermetureProgrammeManutention
+  programmeManutentionPeriodeDetails: ProgrammeManutentionPeriodeDetail List
+  programmeManutentionExercices: ProgrammeManutentionExercice List
+
+EtatProgrammeManutentionPeriode_STATE(Accepte=primary,En cours=warnning,Rejete=danger)_MS(ms1)_ROLES(admin)_SUB-MODULE(plannification)_MENU(Plannification):
+  id: Long ID
+  libelle: String LABEL_REQ
+  code: String REF_REQ
+  style: String STYLE
+  description: String LARGE
+
+ProgrammeManutentionPeriodeDetail_MS(ms1)_ROLES(admin)_SUB-MODULE(plannification)_MENU(Plannification):
+  id: Long ID
+  centreOperatoire: CentreOperatoire
+  pourcentage: BigDecimal
+  jour: LocalDateTime
+  programmeManutentionPeriode: ProgrammeManutentionPeriode
+
+EmailOuvertureProgrammeManutention_MS(ms1)_ROLES(admin)_SUB-MODULE(plannification)_MENU(Plannification):
+  id: Long ID
+  code: String REF_REQ
+  libelle: String LABEL_REQ
+  description: String LARGE
+  objet: String
+  corps: String LARGE
+  destinations: String LARGE
+  cc: String LARGE
+
+EmailFermetureProgrammeManutention_MS(ms1)_ROLES(admin)_SUB-MODULE(plannification)_MENU(Plannification):
+  id: Long ID
+  code: String REF_REQ
+  libelle: String LABEL_REQ
+  description: String LARGE
+  objet: String
+  corps: String LARGE
+  destinations: String LARGE
+  cc: String LARGE
+
+ProgrammeManutentionExercice_MS(ms1)_ROLES(admin)_SUB-MODULE(plannification)_MENU(Plannification):
+  id: Long ID
+  code: String REF_REQ
+  libelle: String LABEL_REQ
+  description: String LARGE
+  exercice: Exercice
+  dateProgrammeManutentionExercice: LocalDateTime
+  etatProgrammeManutentionExercice: EtatProgrammeManutentionExercice
+  emailOuvertureProgrammeManutention: EmailOuvertureProgrammeManutention
+  emailFermetureProgrammeManutention: EmailFermetureProgrammeManutention
+  programmeManutentionExerciceDetails: ProgrammeManutentionExerciceDetail List
+
+
+ProgrammeManutentionExerciceDetail_MS(ms1)_ROLES(admin)_SUB-MODULE(plannification)_MENU(Plannification):
+  id: Long ID
+  centreOperatoire: CentreOperatoire
+  pourcentage: BigDecimal
+  jour: LocalDateTime
+  programmeManutentionExercice: ProgrammeManutentionExercice
+
+EtatProgrammeManutentionExercice_STATE(Accepte=success,En cours=warnning,Rejete=danger)_MS(ms1)_ROLES(admin)_SUB-MODULE(plannification)_MENU(Plannification):
+  id: Long ID
+  libelle: String LABEL_REQ
+  code: String REF_REQ
+  style: String STYLE
+  description: String LARGE
+
+
+# module production
+ProductionPeriode_MS(ms1)_ROLES(admin)_SUB-MODULE(production)_MENU(Production):
+  id: Long ID
+  code: String REF_REQ
+  libelle: String LABEL_REQ
+  description: String LARGE
+  periode: Periode
+  jour: LocalDateTime
+  ppv: BigDecimal
+  baseLine: BigDecimal
+  realise: BigDecimal
+  actualise: BigDecimal
+
+  totalExtractionRealise: BigDecimal
+  totalExtractionPrevu: BigDecimal
+  totalExtractionPourcentage: BigDecimal
+
+  totalCriblageRealise: BigDecimal
+  totalCriblagePrevu: BigDecimal
+  totalCriblagePourcentage: BigDecimal
+
+  totalLavageRealise: BigDecimal
+  totalLavagePrevu: BigDecimal
+  totalLavagePourcentage: BigDecimal
+
+  totalCalcinationRealise: BigDecimal
+  totalCalcinationPrevu: BigDecimal
+  totalCalcinationPourcentage: BigDecimal
+
+  totalExpeditionPortRealise: BigDecimal
+  totalExpeditionPortPrevu: BigDecimal
+  totalExpeditionPortPourcentage: BigDecimal
+
+  totalVenteLocaleRealise: BigDecimal
+  totalVenteLocalePrevu: BigDecimal
+  totalVenteLocalePourcentage: BigDecimal
+
+  totalExportRealise: BigDecimal
+  totalExportPrevu: BigDecimal
+  totalExportPourcentage: BigDecimal
+
+  productionExercices: ProductionExercice List
+
+  productionPeriodeProduitMarchands: ProductionPeriodeProduitMarchand List
+
+
+
+ProductionExercice_MS(ms1)_ROLES(admin)_SUB-MODULE(production)_MENU(Production):
+  id: Long ID
+  code: String REF_REQ
+  libelle: String LABEL_REQ
+  description: String LARGE
+  exercice: Exercice
+  jour: LocalDateTime
+  ppv: BigDecimal
+  baseLine: BigDecimal
+  realise: BigDecimal
+  actualise: BigDecimal
+
+  totalExtractionRealise: BigDecimal
+  totalExtractionPrevu: BigDecimal
+  totalExtractionPourcentage: BigDecimal
+
+  totalCriblageRealise: BigDecimal
+  totalCriblagePrevu: BigDecimal
+  totalCriblagePourcentage: BigDecimal
+
+  totalLavageRealise: BigDecimal
+  totalLavagePrevu: BigDecimal
+  totalLavagePourcentage: BigDecimal
+
+  totalCalcinationRealise: BigDecimal
+  totalCalcinationPrevu: BigDecimal
+  totalCalcinationPourcentage: BigDecimal
+
+  totalExpeditionPortRealise: BigDecimal
+  totalExpeditionPortPrevu: BigDecimal
+  totalExpeditionPortPourcentage: BigDecimal
+
+  totalVenteLocaleRealise: BigDecimal
+  totalVenteLocalePrevu: BigDecimal
+  totalVenteLocalePourcentage: BigDecimal
+
+  totalExportRealise: BigDecimal
+  totalExportPrevu: BigDecimal
+  totalExportPourcentage: BigDecimal
+
+
+  extractions: Extraction List
+  criblages: Criblage List
+  transportSites: TransportSite List
+  lavages: Lavage List
+  sechages: Sechage List
+  calcinations: Calcination List
+  expeditions: Expedition List
+
+  productionExerciceProduitMarchands: ProductionExerciceProduitMarchand List
+
+
+
+ProductionPeriodeProduitMarchand_MS(ms1)_ROLES(admin)_SUB-MODULE(production)_MENU(Production):
+  id: Long ID
+  description: String LARGE
+  produitMarchand: ProduitMarchand
+  jour: LocalDateTime
+  baseLine: BigDecimal
+  ppv: BigDecimal
+  realise: BigDecimal
+  actualise: BigDecimal
+  productionPeriode: ProductionPeriode
+
+ProductionExerciceProduitMarchand_MS(ms1)_ROLES(admin)_SUB-MODULE(production)_MENU(Production):
+  id: Long ID
+  description: String LARGE
+  produitMarchand: ProduitMarchand
+  jour: LocalDateTime
+  baseLine: BigDecimal
+  ppv: BigDecimal
+  realise: BigDecimal
+  actualise: BigDecimal
+  productionExercice: ProductionExercice
+
+# module Supply Chain
+Extraction_MS(ms1)_ROLES(admin)_SUB-MODULE(supply)_MENU(Supply Chain):
+  id: Long ID
+  description: String LARGE
+  produitSource: ProduitSource
+  entite: CentreOperatoire
+  jour: LocalDateTime
+
+  baseLine: BigDecimal
+  ppv: BigDecimal
+  realise: BigDecimal
+  actualise: BigDecimal
+
+  baseLineCout: BigDecimal
+  ppvCout: BigDecimal
+  realiseCout: BigDecimal
+  actualiseCout: BigDecimal
+
+  productionExercice: ProductionExercice
+
+
+Criblage_MS(ms1)_ROLES(admin)_SUB-MODULE(supply)_MENU(Supply Chain):
+  id: Long ID
+  description: String LARGE
+  produitSource: ProduitSource
+  jour: LocalDateTime
+
+  entite: CentreOperatoire
+  baseLine: BigDecimal
+  ppv: BigDecimal
+  realise: BigDecimal
+  actualise: BigDecimal
+
+  baseLineCout: BigDecimal
+  ppvCout: BigDecimal
+  realiseCout: BigDecimal
+  actualiseCout: BigDecimal
+
+  productionExercice: ProductionExercice
+
+TransportSite_MS(ms1)_ROLES(admin)_SUB-MODULE(supply)_MENU(Supply Chain):
+  id: Long ID
+  description: String LARGE
+  produitSource: ProduitSource
+  entite: CentreOperatoire
+  jour: LocalDateTime
+
+  typeTransport: TypeTransport
+  usine: CentreOperatoire
+  tauxCompletude: BigDecimal
+  tempsTransite: BigDecimal
+  expedie: Boolean
+  planifie: Boolean
+
+  baseLine: BigDecimal
+  ppv: BigDecimal
+  realise: BigDecimal
+  actualise: BigDecimal
+
+  baseLineCout: BigDecimal
+  ppvCout: BigDecimal
+  realiseCout: BigDecimal
+  actualiseCout: BigDecimal
+
+  productionExercice: ProductionExercice
+
+Lavage_MS(ms1)_ROLES(admin)_SUB-MODULE(supply)_MENU(Supply Chain):
+  id: Long ID
+  description: String LARGE
+  produitSource: ProduitSource
+  usine: CentreOperatoire
+  baseLine: BigDecimal
+  jour: LocalDateTime
+
+  ppv: BigDecimal
+  realise: BigDecimal
+  actualise: BigDecimal
+  productionExercice: ProductionExercice
+  coutLavages: CoutLavage List
+
+CoutLavage_MS(ms1)_ROLES(admin)_SUB-MODULE(supply)_MENU(Supply Chain):
+  id: Long ID
+  description: String LARGE
+  typeChargeLavage: TypeChargeLavage
+  jour: LocalDateTime
+
+  baseLine: BigDecimal
+  ppv: BigDecimal
+  realise: BigDecimal
+  actualise: BigDecimal
+  lavage: Lavage
+
+TypeChargeLavage_STATE(Amine=primary,Ester=danger,Acide=primary,Flocluent=danger)_MS(ms1)_ROLES(admin)_SUB-MODULE(supply)_MENU(Supply Chain):
+  id: Long ID
+  libelle: String LABEL_REQ
+  code: String REF_REQ
+  style: String STYLE
+  description: String LARGE
+
+Sechage_MS(ms1)_ROLES(admin)_SUB-MODULE(supply)_MENU(Supply Chain):
+  id: Long ID
+  description: String LARGE
+  produitMarchand: ProduitMarchand
+  jour: LocalDateTime
+  usine: CentreOperatoire
+  baseLine: BigDecimal
+  ppv: BigDecimal
+  realise: BigDecimal
+  actualise: BigDecimal
+
+  baseLineCout: BigDecimal
+  ppvCout: BigDecimal
+  realiseCout: BigDecimal
+  actualiseCout: BigDecimal
+
+  productionExercice: ProductionExercice
+
+Calcination_MS(ms1)_ROLES(admin)_SUB-MODULE(supply)_MENU(Supply Chain):
+  id: Long ID
+  description: String LARGE
+  produitMarchand: ProduitMarchand
+  jour: LocalDateTime
+
+  usine: CentreOperatoire
+  baseLine: BigDecimal
+  ppv: BigDecimal
+  realise: BigDecimal
+  actualise: BigDecimal
+
+  baseLineCout: BigDecimal
+  ppvCout: BigDecimal
+  realiseCout: BigDecimal
+  actualiseCout: BigDecimal
+
+  productionExercice: ProductionExercice
+
+
+Expedition_MS(ms1)_ROLES(admin)_SUB-MODULE(supply)_MENU(Supply Chain):
+  id: Long ID
+  description: String LARGE
+  produitSource: ProduitSource
+  typeTransport: TypeTransport
+  jour: LocalDateTime
+  usine: CentreOperatoire
+  typeExpedition: TypeExpedition
+  baseLine: BigDecimal
+  ppv: BigDecimal
+  realise: BigDecimal
+  actualise: BigDecimal
+
+  baseLineCout: BigDecimal
+  ppvCout: BigDecimal
+  realiseCout: BigDecimal
+  actualiseCout: BigDecimal
+
+  productionExercice: ProductionExercice
+
+
+# module Supply Chain Config
+TypeExpedition_STATE(Locale=primary,Port=danger)_MS(ms1)_ROLES(admin)_SUB-MODULE(supplyconfig)_MENU(Supply Chain Config):
+  id: Long ID
+  libelle: String LABEL_REQ
+  code: String REF_REQ
+  style: String STYLE
+  description: String LARGE
+
+TypeTransport_STATE(Convoyeur=primary,Camion=secondary,Train=danger)_MS(ms1)_ROLES(admin)_SUB-MODULE(supplyconfig)_MENU(Supply Chain Config):
+  id: Long ID
+  libelle: String LABEL_REQ
+  code: String REF_REQ
+  style: String STYLE
+  description: String LARGE
+
+# module aleas
+Reclamation_MS(ms1)_ROLES(admin)_SUB-MODULE(aleas)_MENU(Gestion des aleas):
+  id: Long ID
+  code: String REF_REQ
+  libelle: String
+  centreOperatoire: CentreOperatoire # to be confirmed
+  produitMarchand: ProduitMarchand
+  quantite: BigDecimal
+  motif: Motif
+  dateReception: LocalDateTime
+  actionEntreprise: ActionEntreprise
+  commentaire: String
+  statutReclamation: StatutReclamation
+
+Motif_STATE(MGO eleve=primary)_MS(ms1)_ROLES(admin)_SUB-MODULE(aleas)_MENU(Gestion des aleas):
+  id: Long ID
+  libelle: String LABEL_REQ
+  code: String REF_REQ
+  style: String STYLE
+  description: String LARGE
+
+
+ArretNonPlanifie_MS(ms1)_ROLES(admin)_SUB-MODULE(aleas)_MENU(Gestion des aleas):
+  id: Long ID
+  code: String REF_REQ
+  libelle: String
+  commentaire: String LARGE
+  centreOperatoire: CentreOperatoire
+  causeArret: CauseArret
+  dureeEstimee: BigDecimal
+  actionEntreprise: ActionEntreprise
+  etatReclamation: EtatReclamation
+
+
+StatutReclamation_STATE(Fondé=primary)_MS(ms1)_ROLES(admin)_SUB-MODULE(aleas)_MENU(Gestion des aleas):
+  id: Long ID
+  libelle: String LABEL_REQ
+  code: String REF_REQ
+  style: String STYLE
+  description: String LARGE
+
+EtatReclamation_STATE(Traité=primary)_MS(ms1)_ROLES(admin)_SUB-MODULE(aleas)_MENU(Gestion des aleas):
+  id: Long ID
+  libelle: String LABEL_REQ
+  code: String REF_REQ
+  style: String STYLE
+  description: String LARGE
+
+CauseArret_STATE(Panne decanteur=primary)_MS(ms1)_ROLES(admin)_SUB-MODULE(aleas)_MENU(Gestion des aleas):
+  id: Long ID
+  libelle: String LABEL_REQ
+  code: String REF_REQ
+  style: String STYLE
+  description: String LARGE
+
+ActionEntreprise_STATE(Mise a jour Planing=primary)_MS(ms1)_ROLES(admin)_SUB-MODULE(aleas)_MENU(Gestion des aleas):
+  id: Long ID
+  libelle: String LABEL_REQ
+  code: String REF_REQ
+  style: String STYLE
+  description: String LARGE
+
+
+# module gestion de demande
+Demande_MS(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Demande Management):
+  id: Long ID
+  code: String REF_REQ
+  libelle: String
+  commentaire: String LARGE
+  actionEntreprise: ActionEntreprise # to be confirmed
+  produitMarchand: ProduitMArchand
+  client: Client
+  typeClient: TypeClient
+  dateDemande: LocalDateTimeTime
+  volume: BigDecimal
+  quantite: BigDecimal
+  typeDemande: TypeDemande
+  etatDemande: EtatDemande
+
+TypeClient_STATE(Local=primary,Export=danger)_MS(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Demande Management):
+  id: Long ID
+  libelle: String LABEL_REQ
+  code: String REF_REQ
+  style: String STYLE
+  description: String LARGE
+
+Client_MS(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Demande Management):
+  id: Long ID
+  libelle: String LABEL_REQ
+  code: String REF_REQ
+  typeClient: TypeClient
+
+TypeDemande_STATE(Standard=primary,Imprevue=danger)_MS(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Demande Management):
+  id: Long ID
+  libelle: String LABEL_REQ
+  code: String REF_REQ
+  style: String STYLE
+  description: String LARGE
+
+EtatDemande_STATE(Accepter=primary,Refuser=danger)_MS(ms1)_ROLES(admin)_SUB-MODULE(demande)_MENU(Demande Management):
+  id: Long ID
+  libelle: String LABEL_REQ
+  code: String REF_REQ
+  style: String STYLE
+  description: String LARGE
+
+
+# module gestion de stock
+OperationStock_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion de stock):
+  id: Long ID
+  code: String REF_REQ
+  libelle: String
+  quantite: BigDecimal
+  entite: CentreOperatoire
+  typeOperationStock: TypeOperationStock
+  dateOperationStock: LocalDateTime
+
+Stock_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion de stock):
+  id: Long ID
+  code: String REF_REQ
+  produit: Produit
+  quantite: BigDecimal
+  magasin: Magasin
+  autonomie: BigDecimal
+  totalOperationEntree: BigDecimal
+  totalOperationSortie: BigDecimal
+  variationStock: BigDecimal
+  quantiteAujourdhui: BigDecimal
+  quantiteHiere: BigDecimal
+
+
+Magasin_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion de stock):
+  id: Long ID
+  code: String REF_REQ
+  libelle: String
+  autonomie: BigDecimal
+  quantite: BigDecimal
+  prixUnitaire: BigDecimal
+  prix: BigDecimal
+  centreOperatoire: CentreOperatoire
+
+
+TypeOperationStock_STATE(Entree=primary,Sortie=danger)_MS(ms1)_ROLES(admin)_SUB-MODULE(stock)_MENU(Gestion de stock):
+  id: Long ID
+  libelle: String LABEL_REQ
+  code: String REF_REQ
+  style: String STYLE
+  description: String LARGE
+
+
+# module gestion de Catalogue
+Produit_MS(ms1)_ROLES(admin)_SUB-MODULE(catalogue)_MENU(Catalogue Produit):
+  id: Long ID
+  code: String REF_REQ
+  libelle: String LABEL_REQ
+  description: String LARGE
+ProduitMarchand_STATE(G10=primary,BG22=danger,BG10=info,Ycc01=success)_MS(ms1)_ROLES(admin)_SUB-MODULE(catalogue)_MENU(Catalogue Produit):
+  id: Long ID
+  code: String REF_REQ
+  libelle: String LABEL_REQ
+  style: String STYLE
+  description: String LARGE
+
+ProduitSource_STATE(BTB=primary,MT=danger,BT=info)_MS(ms1)_ROLES(admin)_SUB-MODULE(catalogue)_MENU(Catalogue Produit):
+  id: Long ID
+  code: String REF_REQ
+  libelle: String LABEL_REQ
+  style: String STYLE
+  description: String LARGE
+
+ProduitSourceMarchand_MS(ms1)_ROLES(admin)_SUB-MODULE(catalogue)_MENU(Catalogue Produit):
+  id: Long ID
+  produitMarchand: ProduitMarchand
+  produitSource: ProduitSource
+
+
+# module gestion de centre operatoire
+CentreOperatoire_STATE(Mine Mzinda=primary,Mine Bouchane=secondary,Mine Youssoufia=success,Laverie Benguerir=danger,Laverie Youssoufia=warning,Sechage=info,Calcination=dark)_MS(ms1)_ROLES(admin)_SUB-MODULE(centreoperatoire)_MENU(Centre Operatoire):
+  id: Long ID
+  libelle: String LABEL_REQ
+  code: String REF_REQ
+  style: String STYLE
+  description: String LARGE
+  capacite: BigDecimal
+  typeCentreOperatoire: TypeCentreOperatoire
+
+
+TypeCentreOperatoire_STATE(Mine=secondary,Laverie=primary,Sacherie=primary,Calcination=danger)_MS(ms1)_ROLES(admin)_SUB-MODULE(centreoperatoire)_MENU(Centre Operatoire):
+  id: Long ID
+  libelle: String LABEL_REQ
+  code: String REF_REQ
+  style: String STYLE
+  description: String LARGE  
+

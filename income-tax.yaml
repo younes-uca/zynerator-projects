@@ -1,0 +1,64 @@
+# Ceci est un projet qui permet de gerer les taxs IS
+# Techno : Spring senior & 2- Angular junior
+Region_MS(ms1)_ROLES(admin)_SUB-MODULE(tax)_MENU(Configuration):
+  id: Long ID
+  code: String REF_REQ
+  label: String LABEL_REQ
+  description: String LARGE
+
+Company_MS(ms1)_ROLES(admin)_SUB-MODULE(company)_MENU(Company Management):
+  id: Long ID
+  identifier: String REF_REQ
+  label: String LABEL_REQ
+  description: String LARGE
+  legalCategory: LegalCategory
+  region: Region
+
+TaxRate_MS(ms1)_ROLES(admin)_SUB-MODULE(tax)_MENU(Configuration):
+  id: Long ID
+  corporateCategory: String REF_REQ
+  benefitsMin: BigDecimal
+  benefitsMax: BigDecimal
+  region: Region
+  pourcent: BigDecimal
+  penalty: BigDecimal
+
+CorporateIncomeTax_MS(ms1)_ROLES(admin)_SUB-MODULE(tax)_MENU(Tax Calculation):
+  id: Long ID
+  company: Company
+  year: Integer
+  taxRate: TaxRate
+  baseAmount: BigDecimal
+  numberOfMonthsInArrears: Integer
+  penalty: BigDecimal
+  totalTax: BigDecimal
+  corporateIncomeTaxState: CorporateIncomeTaxState
+  corporateIncomeTaxInvoices: CorporateIncomeTaxInvoice List
+
+CorporateIncomeTaxInvoice_MS(ms1)_ROLES(admin)_SUB-MODULE(invoice)_MENU(Invoice Management):
+  id: Long ID
+  corporateIncomeTax: CorporateIncomeTax
+  reference: String REF_REQ
+  description: String LARGE
+  date: LocalDateTime
+  netAmount: BigDecimal
+  grossAmount: BigDecimal
+  valueAddedTax: BigDecimal
+  invoiceType: InvoiceType
+
+InvoiceType_STATE(Vendor=info,Customer=warning)_MS(ms1)_ROLES(admin)_SUB-MODULE(tax)_MENU(Tax Calculation):
+  id: Long ID
+  code: String REF_REQ
+  label: String LABEL_REQ
+  style: String STYLE_REQ
+
+CorporateIncomeTaxState_STATE(New=info,InProgress=warning,Validated=success)_MS(ms1)_ROLES(admin)_SUB-MODULE(tax)_MENU(Tax Calculation):
+  id: Long ID
+  code: String REF_REQ
+  label: String LABEL_REQ
+  style: String STYLE_REQ
+
+LegalCategory_STATE(LLC=info,INC=warning,CORP=success)_MS(ms1)_ROLES(admin)_SUB-MODULE(company)_MENU(Company Management):
+  id: Long ID
+  code: String REF_REQ
+  label: String LABEL_REQ

@@ -1,0 +1,369 @@
+# Techno : Spring junior & 2- React junior
+
+# ---------------------------------------------------------------------
+# 1. DeclarationCotisation
+# ---------------------------------------------------------------------
+
+
+# ---------------------------------------------------------------------
+# 1.1 Historique
+# ---------------------------------------------------------------------
+DeclarationCotisationHistorique_MS(ms1)_DB(DECL-COTIS-HIST)_ENTITY-TYPE(H)_ROLES(admin,employeur)_SUB-MODULE(cotisation-historique)_MENU(Historique Cotisation Synthese,pi pi-fw pi-file-edit)_NO-SEQ_ICON(pi pi-upload):
+  id: Long ID
+  reference: String REF
+  libelle: String LABEL
+  libelleArab: String
+  description: String LARGE
+  descriptionArab: String LARGE
+  message: String LARGE
+  messageArab: String LARGE
+  nombreTotal: Integer
+
+  username: String
+  usernameArab: String
+  userDetails: String LARGE
+  userDetailsArab: String LARGE
+
+  employeur: Employeur
+  mutuelle: Mutuelle
+
+  declarationCotisationPeriode: DeclarationCotisationPeriode REQ
+  statutDeclarationCotisationHistory: StatutDeclarationCotisationHistory REQ
+  typeDeclarationCotisationHistorique: TypeDeclarationCotisationHistorique REQ
+  initialisateurCotisation: InitialisateurCotisation REQ
+
+  declarationCotisation: DeclarationCotisation REQ
+
+
+TypeDeclarationCotisationHistorique_MS(ms1)_DB(DECL-COTIS_HIST-TYPE)_ENTITY-TYPE(C)_STATE(Depot=warning,Annulation=sucess)_ROLES(admin,employeur)_SUB-MODULE(cotisation-historique)_MENU(Historique Cotisation,pi pi-fw pi-file-edit)_NO-SEQ_ICON(pi pi-check):
+  id: Long ID
+  code: String REF_REQ
+  libelle: String LABEL_REQ
+  libelleArab: String
+  styleApplique: String STYLE_REQ
+  description: String LARGE
+
+
+StatutDeclarationCotisationHistorique_MS(ms1)_DB(DECL-COTIS-HIST-STAT)_ENTITY-TYPE(C)_STATE(KO=warning,OK=sucess)_ROLES(admin,employeur)_SUB-MODULE(cotisation-historique)_MENU(Historique Cotisation,pi pi-fw pi-file-edit)_NO-SEQ_ICON(pi pi-check):
+  id: Long ID
+  code: String REF_REQ
+  libelle: String LABEL_REQ
+  libelleArab: String
+  styleApplique: String STYLE_REQ
+  description: String LARGE
+
+
+# ---------------------------------------------------------------------
+# 1.2 Historique Echange
+# ---------------------------------------------------------------------
+
+HistoriqueEchangeDeclarationCotisation_MS(ms1)_DB(DECL-COTIS-ECHANGE-HIST)_ENTITY-TYPE(H)_ROLES(admin,employeur)_SUB-MODULE(cotisation-historique)_MENU(Historique Cotisation,pi pi-fw pi-file-edit)_NO-SEQ_ICON(pi pi-upload):
+  id: Long ID
+  reference: String
+  numero: String
+  libelle: String LABEL
+  libelleArab: String
+  description: String LARGE
+  descriptionArab: String LARGE
+
+  source: PartieHistoriqueEchangeDeclarationCotisation
+  destination: PartieHistoriqueEchangeDeclarationCotisation
+
+  employeur: Employeur
+  mutuelle: Mutuelle
+  
+  dateDebutEchange: LocalDateTime
+  dateFinEchange: LocalDateTime
+  
+  nombreElementEhange: Integer
+  nombreElementEhangeEnvoieOk: Integer
+  nombreElementEhangeEnvoieKo: Integer
+  
+  resultatEchange: String LARGE
+  resultatEchangeArab: String LARGE
+  
+  statutHistoriqueEchangeDeclarationCotisation: StatutHistoriqueEchangeDeclarationCotisation
+  canalHistoriqueEchangeDeclarationCotisation: CanalHistoriqueEchangeDeclarationCotisation
+
+
+
+
+StatutHistoriqueEchangeDeclarationCotisation_MS(ms1)_DB(DECL-COTIS-ECHANGE-HIST-STAT)_ENTITY-TYPE(C)_STATE(OK=success,PENDING=warning,KO=error)_ROLES(admin,employeur)_SUB-MODULE(cotisation-echange)_MENU(Echange Historique Cotisation,pi pi-fw pi-file-edit)_NO-SEQ_ICON(pi pi-upload):
+  id: Long ID
+  code: String REF_REQ
+  libelle: String LABEL_REQ
+  libelleArab: String
+  styleApplique: String STYLE_REQ
+  description: String LARGE
+
+
+
+PartieHistoriqueEchangeDeclarationCotisation_MS(ms1)_DB(DEC-COTIS-ECHANGE-HIST-PART)_ENTITY-TYPE(C)_STATE(PORTAL=success,CNSS BACK OFFICE=warning)_ROLES(admin,employeur)_SUB-MODULE(cotisation-echange)_MENU(Echange Historique Cotisation,pi pi-fw pi-file-edit)_NO-SEQ_ICON(pi pi-upload):
+  id: Long ID
+  code: String REF_REQ
+  libelle: String LABEL_REQ
+  libelleArab: String
+  styleApplique: String STYLE_REQ
+  description: String LARGE
+
+
+CanalHistoriqueEchangeDeclarationCotisation_MS(ms1)_DB(DECL-COTIS-ECHANGE-HIST-CANAL)_ENTITY-TYPE(C)_STATE(System=success,Email=warning)_ROLES(admin,employeur)_SUB-MODULE(cotisation-echange)_MENU(Echange Historique Cotisation,pi pi-fw pi-file-edit)_NO-SEQ_ICON(pi pi-upload):
+  id: Long ID
+  code: String REF_REQ
+  libelle: String LABEL_REQ
+  libelleArab: String
+  styleApplique: String STYLE_REQ
+  description: String LARGE
+
+
+# ---------------------------------------------------------------------
+# 1.2 Notification
+# ---------------------------------------------------------------------
+
+NotificationDeclarationCotisation_MS(ms1)_DB(DECL-COTIS-NOTIF)_ENTITY-TYPE(D)_ROLES(admin,employeur)_SUB-MODULE(cotisation-notif)_MENU(Notification Cotisation,pi pi-fw pi-file-edit)_NO-SEQ_ICON(pi pi-upload):
+  id: Long ID
+  reference: String REF
+  libelle: String LABEL
+  libelleArab: String
+
+  description: String LARGE
+  descriptionArab: String LARGE
+  message: String LARGE
+  messageArab: String LARGE
+
+  demandeImmatriculation: DeclarationCotisation
+  statutNotificationDeclarationCotisation: StatutNotificationDeclarationCotisation
+
+  contactDeclarant: String
+  objetDeclarant: String LARGE
+  objetDeclarantArab: String LARGE
+  corpsDeclarant: String LARGE
+  corpsDeclarantArab: String LARGE
+  dateEnvoiDeclarant: LocalDateTime
+  dateValidationEnvoiDeclarant: LocalDateTime
+  canalNotificationDeclarationCotisationDeclarant: CanalNotificationDeclarationCotisation
+  statutNotificationDeclarationCotisationDeclarant: StatutNotificationDeclarationCotisation
+
+
+
+StatutNotificationDeclarationCotisation_MS(ms1)_DB(DECL-COTIS-NOTIF-STAT)_ENTITY-TYPE(C)_STATE(OK=success,PENDING=warning,KO=error)_ROLES(admin,employeur)_SUB-MODULE(cotisation-notif)_MENU(Notification Cotisation,pi pi-fw pi-file-edit)_NO-SEQ_ICON(pi pi-upload):
+  id: Long ID
+  code: String REF_REQ
+  libelle: String LABEL_REQ
+  libelleArab: String
+  styleApplique: String STYLE_REQ
+  description: String LARGE
+
+CanalNotificationDeclarationCotisation_MS(ms1)_DB(DECL-COTIS-NOTIF-CANAL)_ENTITY-TYPE(C)_STATE(EMAIL=success,SYSTEM=error,SMS=warning)_ROLES(admin,employeur)_SUB-MODULE(cotisation-notif)_MENU(Notification Cotisation,pi pi-fw pi-file-edit)_NO-SEQ_ICON(pi pi-upload):
+  id: Long ID
+  code: String REF_REQ
+  libelle: String LABEL_REQ
+  libelleArab: String
+  styleApplique: String STYLE_REQ
+  description: String LARGE
+
+
+# ---------------------------------------------------------------------
+# 1.3 Core
+# ---------------------------------------------------------------------
+
+DeclarationCotisationSynthese_MS(ms1)_DB(DECL-COTIS-SYNTH)_ENTITY-TYPE(D)_ROLES(admin,employeur)_SUB-MODULE(cotisation-core)_MENU(Déclaration Cotisation,pi pi-fw pi-file-edit)_NO-SEQ_ICON(pi pi-upload):
+  id: Long ID
+  reference: String REF
+  libelle: String LABEL
+  libelleArab: String
+  description: String LARGE
+  descriptionArab: String LARGE
+  employeur: Employeur
+  mutuelle: mutuelle
+
+  declarationCotisationPeriode: DeclarationCotisationPeriode REQ
+  declarationCotisation: DeclarationCotisation
+  nombreTotal: Integer
+  nombreTotalControleOk: Integer
+  nombreTotalControleKo: Integer
+  nombreTotalAnnule: Integer
+  nombreTotalValidationOk: Integer
+  nombreTotalValidationKo: Integer
+  nombreTotalValidationFiabiliteOk: Integer
+  nombreTotalValidationFiabiliteKo: Integer
+
+  dateDebutDeclarationCotisationSynthese: LocalDateTime
+  dateFinDeclarationCotisationSynthese: LocalDateTime
+
+
+  rapport: String LARGE
+  rapportSuccess: String LARGE
+  rapportSuccessControle: String LARGE
+  rapportSuccessValidation: String LARGE
+  rapportSuccessFiabilisation: String LARGE
+  rapportAnomalie: String LARGE
+  rapportAnomalieControle: String LARGE
+  rapportAnomalieValidation: String LARGE
+  rapportAnomalieFiabilisation: String LARGE
+  rapportError: String LARGE
+  rapportErrorControle: String LARGE
+  rapportErrorValidation: String LARGE
+  rapportErrorFiabilisation: String LARGE
+
+
+
+  declarationCotisations: DeclarationCotisation List
+
+
+
+DeclarationCotisation_MS(ms1)_DB(DECL-COTIS)_ENTITY-TYPE(D)_ROLES(admin,employeur)_SUB-MODULE(cotisation-core)_MENU(Déclaration Cotisation,pi pi-fw pi-file-edit)_NO-SEQ_ICON(pi pi-upload):
+  id: Long ID
+  reference: String REF
+  numero: String LABEL
+
+  # Champ 1 - Periode de declaration (10) [O]
+  periode: String REQ
+
+
+  # Champ 2 - Code Employeur (7) [O]
+  codeEmployeur: String REQ
+
+  # Champ 3 - Intitule Employeur (10) [O]
+  intituleEmployeur: String REQ
+
+  # Champ 4 - Matricule CNSS de l'assuré (10) [N]
+  matriculeCnss: String
+  # Champ 5 - IDENTIFIANT_EMPLOYEUR / matricule interne (12) [O]
+  identifiantEmployeur: String REQ
+  # Champ 6 - NOM (30) [O]
+  nom: String REQ
+  # Champ 7 - PRENOM (30) [O]
+  prenom: String REQ
+  # Champ 8 - CINE /SEJ (13) [O]
+  cine: String REQ
+  sej: String REQ
+
+  # Champ 9 - DATE_NAISSANCE (10) jj/mm/yyyy [O]
+  dateNaissance: LocalDate REQ
+
+  # Champ 10 - ASSIETTE mensuelle de la cotisation (10) [N]
+  assiette: BigDecimal
+
+  # Champ 11 - CONTRIBUTIONS_PATRONALES (7) [N]
+  contributionsPatronales: BigDecimal
+
+  # Champ 12 - COTISATIONS_SALARIALES (7) [N]
+  cotisationsSalariales: BigDecimal
+
+  # Champ 13 - COTISATIONS AMO (Total) (10) [N]
+  cotisationsAmo: BigDecimal
+
+  # Champ 14 - MONTANT_REGULARISATION (11) - peut être négatif [N]
+  montantRegularisation: BigDecimal
+
+  # Champ 15 - DEBUT_EFFECT_REGULARISATION (10) jj/mm/yyyy [N, obligatoire si montantRegularisation renseigné]
+  debutEffectRegularisation: LocalDate
+
+  # Champ 16 - FIN_EFFECT_REGULARISATION (10) jj/mm/yyyy [N, obligatoire si montantRegularisation renseigné]
+  finEffectRegularisation: LocalDate
+
+  # Champ 17 - DATE_RECRUTEMENT (10) jj/mm/yyyy [O pour les nouvelles recrues]
+  dateRecrutement: LocalDate REQ
+
+  # Champ 18 - N° Affilié (7) [N]
+  numeroAffilie: String
+
+  # Champ 19 - Statut de l'agent (30) [N]  motif de cessation : Démission, Décès, Mise en disponibilité...
+  statutAgentDeclarationCotisation: StatutAgentDeclarationCotisation
+
+  # Champ 21 - Date d'effet du statut de l'agent (10) JIMMYYYY  [O si le motif de cessation est renseigné]
+  dateEffetStatutAgent: LocalDate
+
+  assure: Assure
+  mutuelle: mutuelle
+  employeur: Employeur
+  declarationCotisationPeriode: DeclarationCotisationPeriode
+
+  initialisateurCotisation: InitialisateurCotisation
+  controlResultAsJson: String LARGE
+  validationResultAsJson: String LARGE
+  responseAsJson: String LARGE
+  description: String LARGE
+
+  dateDepotInitialisateur: LocalDateTime
+  dateDebutTraitementPremierNiveau: LocalDateTime
+  dateFinTraitementPremierNiveau: LocalDateTime
+  dateAnnulation: LocalDateTime
+  dateEnvoiCnss: LocalDateTime
+  dateReceptionCnss: LocalDateTime
+  dateDebutTraitementDeuxiemeNiveau: LocalDateTime
+  dateFinTraitementDeuxiemeNiveau: LocalDateTime
+  dateRenvoiInitialisateur: LocalDateTime
+  dateReceptionInitialisateur: LocalDateTime
+  dateModificationStatutFinaleInitialisateur: LocalDateTime
+
+
+  statutDeclarationCotisation: StatutDeclarationCotisation
+  declarationCotisationSynthese: DeclarationCotisationSynthese
+
+
+
+
+StatutAgentDeclarationCotisation_MS(ms1)_DB(DECL-COTIS-STAT-AGENT)_ENTITY-TYPE(C)_STATE(Démission=warning,Mise en disponibilité=sucess,Décès=danger)_ROLES(admin,employeur)_SUB-MODULE(cotisation-core)_MENU(Déclaration Cotisation,pi pi-fw pi-file-edit)_NO-SEQ_ICON(pi pi-check):
+  id: Long ID
+  code: String REF_REQ
+  libelle: String LABEL_REQ
+  libelleArab: String
+  styleApplique: String STYLE_REQ
+  description: String LARGE
+
+
+
+StatutDeclarationCotisation_MS(ms1)_DB(DECL-COTIS-STAT)_ENTITY-TYPE(C)_STATE(CONTROL-OK=success,CONTROL-KO=error,VALIDATED=warning,VALIDATED-FIABLE=danger,REJECTED-CONTROL=black,REJECTED=white,ANNULE=black,REJECTED-FIABLE=pink)_ROLES(admin,employeur)_SUB-MODULE(cotisation-core)_MENU(Déclaration Cotisation,pi pi-fw pi-file-edit)_NO-SEQ_ICON(pi pi-check):
+  id: Long ID
+  code: String REF_REQ
+  libelle: String LABEL_REQ
+  libelleArab: String
+  styleApplique: String STYLE_REQ
+  description: String LARGE
+
+InitialisateurCotisation_MS(ms1)_DB(DECL-COTIS-INIT)_ENTITY-TYPE(C)_STATE(CFT=warning,Portail=danger)_ROLES(admin,employeur)_SUB-MODULE(cotisation-core)_MENU(Déclaration Cotisation,pi pi-fw pi-file-edit)_NO-SEQ_ICON(pi pi-check):
+  id: Long ID
+  code: String REF_REQ
+  libelle: String LABEL_REQ
+  libelleArab: String
+  styleApplique: String STYLE_REQ
+  description: String LARGE
+
+
+DeclarationCotisationPeriode_MS(ms1)_DB(DECL-COTIS-PERIODE)_ENTITY-TYPE(C)_ROLES(admin,employeur)_SUB-MODULE(cotisation-core)_MENU(Déclaration Cotisation,pi pi-fw pi-file-edit)_NO-SEQ_ICON(pi pi-check):
+  id: Long ID
+  code: String REF_REQ
+  libelle: String LABEL_REQ
+  libelleArab: String
+  dateDebut: LocalDateTime REQ
+  dateFin: LocalDateTime REQ
+  description: String LARGE
+
+
+Mutuelle_MS(ms1)_DB(ACTOR-MUTUELLE)_ENTITY-TYPE(D)_ROLES(admin,employeur)_SUB-MODULE(actor)_MENU(Acteur,pi pi-fw pi-pencil)_NO-SEQ_ICON(pi pi-check):
+  id: Long ID
+  code: String
+  intitule: String
+  intituleArab: String
+  raisonSociale: String LABEL_REQ
+  numeroAffiliationCnss: String REQ
+
+Employeur_ACTOR_MS(ms1)_DB(ACTOR-EMPLOYEUR)_ENTITY-TYPE(D)_ROLES(admin,employeur)_SUB-MODULE(actor)_MENU(Acteur,pi pi-fw pi-pencil)_NO-SEQ_ICON(pi pi-check):
+  id: Long ID
+  code: String
+  intitule: String
+  intituleArab: String
+  
+
+Assure_MS(ms1)_DB(ACTOR-ASSURE)_ENTITY-TYPE(D)_ROLES(admin,employeur)_SUB-MODULE(actor)_MENU(Acteur,pi pi-fw pi-pencil)_NO-SEQ_ICON(pi pi-check):
+  id: Long ID
+  intitule: String
+  numCnie: String
+  numCse: String
+  nom: String
+  nomArab: String
+  prenom: String
+  prenomArab: String
+ 
